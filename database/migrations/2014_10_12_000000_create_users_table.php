@@ -17,9 +17,17 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('gender',6)->nullable();
+            $table->string('userType')->default('teacher');
+            $table->string('accounts')->nullable();//user can have another accounts
+            $table->integer('parent')->nullable()->comment('user belongs to masjed. example:teacher');
+            $table->string('phone')->nullable();
+            $table->boolean('active')->default(1);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->foreignId('current_team_id')->nullable();
+            $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });
     }
