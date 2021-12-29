@@ -37,6 +37,9 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">السلام عليكم</h1>
                                     </div>
+                                    <center>
+                                        <a href="{{route('login')}}">{{__('Login')}}</a>
+                                    </center>
                                 </div>
                             </div>
                         </div>
