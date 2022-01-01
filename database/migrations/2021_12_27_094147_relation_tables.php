@@ -19,17 +19,19 @@ class RelationTables extends Migration
             $table->integer('program_id');
         });
 
-        Schema::create('user_has_studentstatement', function (Blueprint $table) {
+        Schema::create('user_has_studentstatement_permission', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
             $table->integer('studentstatement_id');
         });
 
-        Schema::create('user_has_msjedstatement', function (Blueprint $table) {
+        Schema::create('user_has_msjedstatement_permission', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
             $table->integer('msjedstatement_id');
         });
+
+        
     }
 
     /**
@@ -40,7 +42,7 @@ class RelationTables extends Migration
     public function down()
     {
         Schema::dropIfExists('user_has_program');
-        Schema::dropIfExists('user_has_studentstatement');
-        Schema::dropIfExists('user_has_msjedstatement');
+        Schema::dropIfExists('user_has_studentstatement_permission');
+        Schema::dropIfExists('user_has_msjedstatement_permission');
     }
 }

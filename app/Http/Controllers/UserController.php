@@ -9,6 +9,10 @@ class UserController extends Controller
 {
  
 
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     public function masjedEdit(User $masjed)
     {
         return view('sb-admin.masjed.edit',compact('masjed'));
@@ -16,7 +20,10 @@ class UserController extends Controller
 
     public function masjedShow(User $masjed)
     {
-        return view('sb-admin.masjed.show',compact('masjed'));
+        $masjedAmountInSum = $masjed->msjedstatements->where('status','in')->sum('amount');
+        $masjedAmountOutSum = $masjed->msjedstatements->where('status','out')->sum('amount');
+        $masjedTotalAmount = $masjedAmountInSum - $masjedAmountOutSum;
+        return view('sb-admin.masjed.show',compact('masjed','masjedAmountInSum','masjedAmountOutSum','masjedTotalAmount'));
     }
     
     public function masjedIndex()

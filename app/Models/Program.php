@@ -23,4 +23,9 @@ class Program extends Model
     public function tasks(){
         return $this->belongsToMany(Task::class);
     }
+
+
+    public function masjed(){
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

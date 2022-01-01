@@ -9,27 +9,24 @@
                     <thead>
                         <tr>
                             <th>{{__('title')}}</th>
-                            <th>يبدأ:</th>
-                            <th>ينتهي:</th>
+                            <th>الفترة</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>{{__('title')}}</th>
-                            <th>يبدأ:</th>
-                            <th>ينتهي:</th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                          @foreach($programs as $program)
                         <tr>
                             <td>
                                 <a href="{{route('program.show',$program->id)}}">{{$program->title}}</a>
+                                <div><small>{{$program->masjed->name}}</small></div>
                             </td>
-                            <td>{{$program->start_at}}</td>
-                            <td>{{$program->end_at}}</td>
+                            <td>
+                                <small>
+                                    <div>يبدأ: {{$program->start_at}}</div>
+                                    <div>ينتهي: {{$program->end_at}}</div>
+                                </small>
+                            </td>
+                            
                             <td>
                                  <a class="btn btn-secondary btn-circle btn-sm" id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" >
                                    <i class="fas fa-fw fa-ellipsis-h"></i>

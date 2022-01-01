@@ -29,7 +29,7 @@
 	        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="direction: ltr;">
 
 	            <!-- Sidebar - Brand -->
-	            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+	            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard')}}">
 	                <div class="sidebar-brand-icon rotate-n-15">
 	                    <i class="fas fa-laugh-wink"></i>
 	                </div>
@@ -40,22 +40,12 @@
 	            <hr class="sidebar-divider my-0">
 
 	            <!-- Nav Item - Dashboard -->
-	            <li class="nav-item">
-	                <a class="nav-link" href="{{route('dashboard')}}">
-	                    <i class="fas fa-fw fa-tachometer-alt"></i>
-	                    <span>{{__('Dashboard')}}</span>
-	                </a>
-	            </li>
+	           
 
-	            <!-- Divider -->
-	            <hr class="sidebar-divider">
-
-	            <!-- Heading -->
-	            <div class="sidebar-heading">
-	                المساجد
-	            </div>
+	           
 
 	            <!-- Nav Item - Pages Collapse Menu -->
+	            @if(auth()->user()->canPermission('masjeds'))
 	            <li class="nav-item" >
 	                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#masjeds"
 	                    aria-expanded="true" aria-controls="masjeds">
@@ -70,8 +60,13 @@
 	                    </div>
 	                </div>
 	            </li>
+	            @endif
+
+	            <!-- Divider -->
+	            <hr class="sidebar-divider">
 
 	            <!-- Nav Item - Pages Collapse Menu -->
+	            @if(auth()->user()->canPermission('program_create_edit'))
 	            <li class="nav-item">
 	                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#programs"
 	                    aria-expanded="true" aria-controls="programs">
@@ -86,8 +81,10 @@
 	                    </div>
 	                </div>
 	            </li>
+	            @endif
 
 	            <!-- Nav Item - Pages Collapse Menu -->
+	            @if(auth()->user()->canPermission('student_create_edit'))
 	            <li class="nav-item">
 	                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#students"
 	                    aria-expanded="true" aria-controls="students">
@@ -109,8 +106,10 @@
 	                    </div>
 	                </div>
 	            </li>
+	            @endif
 
 	            <!-- Nav Item - Pages Collapse Menu -->
+	            @if(auth()->user()->canPermission('task_create_edit'))
 	            <li class="nav-item">
 	                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#tasks"
 	                    aria-expanded="true" aria-controls="tasks">
@@ -129,6 +128,45 @@
 	                    </div>
 	                </div>
 	            </li>
+	            @endif
+
+	            <!-- Nav Item - Pages Collapse Menu -->
+	            @if(auth()->user()->canPermission('studentstatement_create_edit'))
+	            <li class="nav-item">
+	                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#studentstatement"
+	                    aria-expanded="true" aria-controls="studentstatement">
+	                    <span>{{__('studentstatement')}}</span>
+	                    <i class="fas fa-fw fa-users"></i>
+	                </a>
+	                <div id="studentstatement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+	                    <div class="bg-white py-2 collapse-inner rounded">
+	                        <h6 class="collapse-header">إدارة {{__('studentstatement')}}</h6>
+	                        <a class="collapse-item" href="{{route('studentstatement.index')}}">
+	                        	{{__('studentstatement')}} 
+	                    	</a>
+	                    </div>
+	                </div>
+	            </li>
+	            @endif
+
+	            <!-- Nav Item - Pages Collapse Menu -->
+	            @if(auth()->user()->canPermission('msjedstatement_create_edit'))
+	            <li class="nav-item">
+	                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#msjedstatement"
+	                    aria-expanded="true" aria-controls="msjedstatement">
+	                    <span>{{__('msjedstatement')}}</span>
+	                    <i class="fas fa-fw fa-users"></i>
+	                </a>
+	                <div id="msjedstatement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+	                    <div class="bg-white py-2 collapse-inner rounded">
+	                        <h6 class="collapse-header">إدارة {{__('msjedstatement')}}</h6>
+	                        <a class="collapse-item" href="{{route('msjedstatement.index')}}">
+	                        	{{__('msjedstatement')}} 
+	                    	</a>
+	                    </div>
+	                </div>
+	            </li>
+	            @endif
 
 
 
@@ -315,7 +353,7 @@
 	                <!-- End of Topbar -->
 
 	                <!-- Begin Page Content -->
-	                <div class="container-fluid">
+	                <div class="p-2">
 
 	                	@if(session('status'))
 	                	<div class="alert alert-{{session('status')}}">

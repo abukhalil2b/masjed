@@ -4,7 +4,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\StudentstatementController;
+use App\Http\Controllers\MsjedstatementController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -53,6 +55,10 @@ Route::prefix('user')->group(function () {
 	Route::get('teacher/dashboard',[UserController::class,'teacherDashboard'])->name('user.teacher.dashboard');
 	Route::get('teacher/create',[UserController::class,'teacherCreate'])->name('user.teacher.create');
 	Route::post('teacher/store', [UserController::class,'teacherStore'])->name('user.teacher.store');
+
+	// user permission 
+	Route::get('permissions/index/{user}',[PermissionController::class,'index'])->name('user.permissions.index');
+	Route::post('permissions/update/{user}',[PermissionController::class,'update'])->name('user.permissions.update');
 });
 
 Route::prefix('student')->group(function () {
@@ -63,14 +69,24 @@ Route::prefix('student')->group(function () {
 	Route::get('male_index',[StudentController::class,'maleIndex'])->name('student.male_index');
 	Route::get('female_index',[StudentController::class,'femaleIndex'])->name('student.female_index');
 	Route::post('store', [StudentController::class,'store'])->name('student.store');
-
 	Route::post('mark/store', [StudentController::class,'studentPointStore'])->name('student.point.store');
 });
 
-Route::prefix('studentstatement')->group(function () {
-	Route::get('create',[StudentstatementController::class,'create'])->name('studentstatement.create');
+Route::prefix('studentstatement')->middleware('userPermission:studentstatement')->group(function () {
+	Route::get('index',[StudentstatementController::class,'index'])->name('studentstatement.index');
 	Route::get('{studentstatement}/edit',[StudentstatementController::class,'edit'])->name('studentstatement.edit');
+	Route::get('{studentstatement}/delete',[StudentstatementController::class,'destroy'])->name('studentstatement.delete');
 	Route::post('{studentstatement}/update',[StudentstatementController::class,'update'])->name('studentstatement.update');
 	Route::post('store', [StudentstatementController::class,'store'])->name('studentstatement.store');
 });
+
+Route::prefix('msjedstatement')->group(function () {
+	Route::get('index',[MsjedstatementController::class,'index'])->name('msjedstatement.index');
+	Route::get('{msjedstatement}/edit',[MsjedstatementController::class,'edit'])->name('msjedstatement.edit');
+	Route::get('{msjedstatement}/delete',[MsjedstatementController::class,'destroy'])->name('msjedstatement.delete');
+	Route::post('{msjedstatement}/update',[MsjedstatementController::class,'update'])->name('msjedstatement.update');
+	Route::post('store', [MsjedstatementController::class,'store'])->name('msjedstatement.store');
+});
+
+
 

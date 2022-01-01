@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 use DB;
 class ProgramController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $programs = Program::all();
@@ -67,10 +72,11 @@ class ProgramController extends Controller
         return view('sb-admin.program.transfer.create',compact('program','users'));
     }
 
-    public function programTransferStore(Program $program,$user_id)
+    public function programTransferStore(Request $request,Program $program)
     {
-        $program->update(['user_id'=>$user_id]);
-        return redirect()->back()->with(['status'=>'success','message'=>'تم']);
+        $program->update(['user_id'=>$request->user_id]);
+        return redirect()->route('program.index')
+        ->with(['status'=>'success','message'=>'تم']);
     }
 
 

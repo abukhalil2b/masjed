@@ -7,79 +7,52 @@ use Illuminate\Http\Request;
 
 class MsjedstatementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
-        //
+        $loggedUser = Auth()->user();
+        $msjedstatements = Msjedstatement::where('user_id',$loggedUser->id)
+        ->orderby('id','desc')
+        ->get();
+        return view('sb-admin.msjedstatement.index',compact('msjedstatements'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  
     public function store(Request $request)
     {
-        //
+        // return $request->all();
+        $loggedUser = Auth()->user();
+        $request['user_id'] = $loggedUser->id;
+        if($request->status=='out'){
+            $amount = $request->amount * -1;
+            $request['amount'] = $amount;
+        }
+        Msjedstatement::create($request->all());
+        return redirect()->back()->with(['status'=>'success','message'=>'تم']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Msjedstatement  $msjedstatement
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Msjedstatement $msjedstatement)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Msjedstatement  $msjedstatement
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Msjedstatement $msjedstatement)
     {
-        //
+        return view('sb-admin.msjedstatement.edit',compact('msjedstatement'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Msjedstatement  $msjedstatement
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Msjedstatement $msjedstatement)
     {
-        //
+        if($request->status=='out'){
+            $amount = $request->amount * -1;
+            $request['amount'] = $amount;
+        }
+        $msjedstatement->update($request->all());
+        return redirect()->route('msjedstatement.index')->with(['status'=>'success','message'=>'تم']);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Msjedstatement  $msjedstatement
-     * @return \Illuminate\Http\Response
-     */
+  
     public function destroy(Msjedstatement $msjedstatement)
     {
-        //
+        $msjedstatement->delete();
+        return redirect()->back()->with(['status'=>'success','message'=>'تم']);
     }
 }

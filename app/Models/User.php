@@ -47,8 +47,56 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function programs(){
+        return $this->hasMany(Program::class);
+    }
+
+    public function teachers(){
+        return $this->hasMany(Teacher::class);
+    }
+
+    public function students(){
+        return $this->hasMany(Student::class);
+    }
+
+    public function msjedstatements(){
+        return $this->hasMany(Msjedstatement::class);
+    }
+
+    public function studentstatements(){
+        return $this->hasMany(Studentstatement::class);
+    }
     
+    public function userHasMsjedstatementPermission(){
+        return $this->belongsToMany(Msjedstatement::class);
+    }
 
+    public function userHasStudentstatementPermission(){
+        return $this->belongsToMany(Studentstatement::class);
+    }
 
+    public function checkUserHasStudentstatementPermission($studentstatement){
+        $studentstatement = $this->userHasStudentstatementPermission()
+        ->where(['studentstatement_id'=>$studentstatement->id,'user_id'=>$this->id])
+        ->first();
+        if(!$studentstatement){
+            abort(401);
+        }
+    }
+
+    public function roles() {
+        return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
+    }
+
+    public function permissions() {
+        return $this->belongsToMany(Permission::class, 'user_permission', 'user_id', 'permission_id');
+    }
+
+    public function canPermission($slug) {
+        if($this->id===1)return true;
+        return (bool) $this->permissions()->where('slug', $slug)->count();
+    }
+
+ 
 
 }

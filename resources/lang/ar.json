@@ -1,4 +1,6 @@
 {
+    "permissions":"الصلاحيات",
+
     "active":"مفعل",
     "deactive":"معطل",
     "phone":"الهاتف",
@@ -24,6 +26,11 @@
     "status":"العملية أو الحالة",
 
     
+    "out":"صرف",
+    "in":"ايداع",
+    "new":"جديد",
+    "msjedstatement":"رصيد المسجد",
+    "studentstatement":"رصيد الطلبة",
     "programs":"البرامج",
     "program":"برنامج",
 

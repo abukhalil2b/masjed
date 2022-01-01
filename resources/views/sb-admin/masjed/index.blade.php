@@ -31,6 +31,7 @@
 	                            	<i class="fas fa-fw fa-ellipsis-h"></i>
 	                            </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{route('user.permissions.index',$masjed->id)}}">{{__('permissions')}}</a>
                                 	<a class="dropdown-item" href="{{route('user.masjed.show',$masjed->id)}}">{{__('show')}}</a>
                                     <a class="dropdown-item" href="#">{{__('edit')}}</a>
                                     <a class="dropdown-item" href="#">{{__('delete')}}</a>

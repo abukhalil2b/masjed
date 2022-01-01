@@ -1,6 +1,6 @@
 @extends('layouts.sb_admin')
 @section('content')
-	<div class="container">
+    @if(auth()->user()->id===1)
     <div class="box box-blue mt-2 mb-2 p-2">
         عدد {{__('masjeds')}}
         <div class="box box-blue mt-2 mb-2 p-1 m-1">
@@ -32,6 +32,5 @@
             {{count($tasks)}}
         </div>
     </div>
-   
-</div>
+    @endif
 @endsection
