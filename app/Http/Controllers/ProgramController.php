@@ -33,7 +33,8 @@ class ProgramController extends Controller
         $loggedUser = auth()->user();
         $request['user_id']=$loggedUser->id;
         Program::create($request->all());
-        return redirect()->back()->with(['status'=>'success','message'=>'تم']);
+        return redirect()->route('program.index')
+        ->with(['status'=>'success','message'=>'تم']);
     }
 
   
@@ -66,19 +67,6 @@ class ProgramController extends Controller
         return view('sb-admin.program.show',compact('program'));
     }
 
-    public function programTransferCreate(Program $program)
-    {   
-        $users = User::where('id','<>',1)->get();
-        return view('sb-admin.program.transfer.create',compact('program','users'));
-    }
-
-    public function programTransferStore(Request $request,Program $program)
-    {
-        $program->update(['user_id'=>$request->user_id]);
-        return redirect()->route('program.index')
-        ->with(['status'=>'success','message'=>'تم']);
-    }
-
 
     public function programStudentCreate(Program $program)
     {   
@@ -92,6 +80,7 @@ class ProgramController extends Controller
 
     public function programStudentStore(Request $request,Program $program)
     {
+
         if($request->studentIds){
             $program->students()->attach($request->studentIds);
             return redirect()->back()->with(['status'=>'success','message'=>'تم']);

@@ -35,7 +35,6 @@
                                    
                                     <a class="dropdown-item" href="{{route('program.task.create',$program->id)}}">إضافة {{__('task')}}</a>
                                     <a class="dropdown-item" href="{{route('program.student.create',$program->id)}}">إضافة {{__('student')}}</a>
-                                    <a class="dropdown-item" href="{{route('program.transfer.create',$program->id)}}">{{__('transfer')}}</a>
                                     <a class="dropdown-item" href="{{route('program.edit',$program->id)}}">{{__('edit')}}</a>
                                     <a class="dropdown-item"onclick="return confirm('هل متأكد؟')" href="{{route('program.destroy',$program->id)}}">{{__('delete')}}</a>
                                 </div>

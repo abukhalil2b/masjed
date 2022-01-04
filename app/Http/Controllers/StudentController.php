@@ -33,9 +33,15 @@ class StudentController extends Controller {
 	}
 
 	public function store(Request $request) {
+		// return $request->all();
 		$request['user_id'] =auth()->user()->id;
 		Student::create($request->all());
-		return redirect()->route('dashboard');
+		if($request->gender=='male'){
+			return redirect()->route('student.male_index')->with(['status'=>'success','message'=>'تم']);
+		}elseif($request->gender=='female'){
+			return redirect()->route('student.female_index')->with(['status'=>'success','message'=>'تم']);
+		}
+		
 	}
 
 	

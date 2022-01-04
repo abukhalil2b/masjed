@@ -1,17 +1,7 @@
 @extends('layouts.sb_admin')
 @section('content')
-<style>
-    .small{
-        font-size: 65%;
-    }
-    .studentstatement-desc{
-        width: 100px;
-        height: 50px;
-    }
-    .font-bold{
-        font-weight: 900;
-    }
-</style>
+
+<h3>{{__('studentstatement')}}</h3>
 <a class="p-4" href="#" data-toggle="modal" data-target="#addNewStudentstatement">+ {{__('new')}}</a>
 <center class="font-bold">الرصيد: {{$studentstatements->sum('amount')}}</center>
 <div class="card mt-3">
@@ -40,9 +30,8 @@
     </div>
 </div>
 
-    <!-- create new  Modal-->
-    @include('sb-admin.studentstatement._create')
-
+<!-- create new  Modal-->
+@include('sb-admin.studentstatement._create')
 
 
 @endsection

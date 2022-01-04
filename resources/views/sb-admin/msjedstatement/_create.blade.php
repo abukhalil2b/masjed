@@ -19,6 +19,7 @@
                             <option value="out">{{__('out')}}</option>
                         </select>
                     </div>
+                    <small class="text-success">بواسطة: {{auth()->user()->name}}</small>
                     <button class="btn text-primary mt-3 float-left">{{__('Save')}}</button>
                     <button class="btn text-secondary mt-3 float-right" type="button" data-dismiss="modal">{{__('Cancel')}}</button>
                 </form>

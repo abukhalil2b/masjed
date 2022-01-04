@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('gender',6)->nullable();
-            $table->string('userType')->default('teacher');
-            $table->string('accounts')->nullable();//user can have another accounts
+            $table->string('userType')->default('masjed');
+            $table->text('accounts')->nullable();//user can have more than one accounts
             $table->integer('parent')->nullable()->comment('user belongs to masjed. example:teacher');
             $table->string('phone')->nullable();
             $table->boolean('active')->default(1);

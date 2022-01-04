@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Wakeel extends Model
 {
     use HasFactory;
+    protected $fillable=['owner'];
+    public function owner(){
+        return $this->belongsTo(User::class,'owner');
+    }
 }

@@ -26,7 +26,8 @@ class User extends Authenticatable
         'userType',
         'phone',
         'active',
-        'parent'
+        'parent',
+        'accounts'
     ];
 
 
@@ -46,6 +47,26 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function isActive(){
+        return $this->active;
+    }
+
+    public function active(){
+        return $this->update(['active'=>1]);
+    }
+
+    public function deactive(){
+        return $this->update(['active'=>0]);
+    }
+
+    public function users(){
+        return $this->hasMany(User::class,'parent');
+    }
+
+    public function parentUser(){
+        return $this->belongsTo(User::class,'parent');
+    }
 
     public function programs(){
         return $this->hasMany(Program::class);
@@ -97,6 +118,11 @@ class User extends Authenticatable
         return (bool) $this->permissions()->where('slug', $slug)->count();
     }
 
- 
+    public function checkUserHasUserPermission($user){
+        $wakeel = $this->users()->whereId($user->id)->first();
+        if(!$wakeel){
+            abort(401);
+        }
+    }
 
 }

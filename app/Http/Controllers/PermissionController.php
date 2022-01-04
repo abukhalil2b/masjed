@@ -20,7 +20,20 @@ class PermissionController extends Controller
         $programs = Permission::whereCate('program')->get();
         $tasks = Permission::whereCate('task')->get();
         $students = Permission::whereCate('student')->get();
-        return view('sb-admin.user.permission.index',compact('msjedstatements','studentstatements','programs','tasks','students','user'));
+        $teachers = Permission::whereCate('teacher')->get();
+        $wakeels = Permission::whereCate('wakeel')->get();
+        $accounts = Permission::whereCate('account')->get();
+        return view('sb-admin.user.permission.index',compact(
+            'msjedstatements',
+            'studentstatements',
+            'programs',
+            'tasks',
+            'students',
+            'teachers',
+            'wakeels',
+            'accounts',
+            'user'
+        ));
     }
 
     public function update(Request $request, User $user)

@@ -1,39 +1,37 @@
 @extends('layouts.sb_admin')
 @section('content')
-<style>
-    .small{
-        font-size: 65%;
-    }
-    .msjedstatement-desc{
-        width: 100px;
-        height: 50px;
-    }
-    .font-bold{
-        font-weight: 900;
-    }
-</style>
+
+<h3>{{__('msjedstatement')}}</h3>
 <a class="p-4" href="#" data-toggle="modal" data-target="#addNewMsjedstatement">+ {{__('new')}}</a>
-<center class="font-bold">الرصيد: {{$msjedstatements->sum('amount')}}</center>
-<div class="card mt-3">
-    <div class="card-body">
+<center><b>الرصيد: {{$msjedstatements->sum('amount')}}</b></center>
+<div class="card mt-2">
+    <div class="p-1">
         @foreach($msjedstatements as $msjedstatement)
-            <div class="float-left small">
+            <div class="text-left small">
                 {{$msjedstatement->created_at->diffForHumans()}}
                 <div><i>بواسطة: {{$msjedstatement->user->name}}</i></div>
             </div>
 
             <div>
+                
+
                 {{abs($msjedstatement->amount)}} 
                 <small>{{__($msjedstatement->status)}}</small>
                 <div class="msjedstatement-desc small"><small>{{$msjedstatement->description}}</small></div>
             </div>
            
-            <a class="btn-circle btn-danger btn-sm small"  href="{{route('msjedstatement.delete',$msjedstatement->id)}}">
-                {{__('delete')}}
-            </a>
-            <a class="btn-circle btn-warning btn-sm small"  href="{{route('msjedstatement.edit',$msjedstatement->id)}}">
-                {{__('edit')}}
-            </a>
+        
+        <div  id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" class="text-left">
+            <i class="fas fa-fw fa-edit"></i>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{route('msjedstatement.edit',$msjedstatement->id)}}">
+                    {{__('edit')}}
+                </a>
+                <a class="dropdown-item"onclick="return confirm('هل متأكد؟')" href="{{route('msjedstatement.delete',$msjedstatement->id)}}">
+                    {{__('delete')}}
+                </a>
+            </div>
+        </div>
         <hr>
         @endforeach
         

@@ -14,8 +14,9 @@ class CreateWakeelsTable extends Migration
     public function up()
     {
         Schema::create('wakeels', function (Blueprint $table) {
-                        $table->string('yearbirth')->nullable();
-
+            $table->id();
+            $table->integer('owner')->unique();//user id
+            $table->timestamps();
         });
     }
 

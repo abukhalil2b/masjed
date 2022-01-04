@@ -31,7 +31,7 @@
 	            <!-- Sidebar - Brand -->
 	            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard')}}">
 	                <div class="sidebar-brand-icon rotate-n-15">
-	                    <i class="fas fa-laugh-wink"></i>
+	                    <i class="fas fa-moon"></i>
 	                </div>
 	                <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Laravel') }}</div>
 	            </a>
@@ -39,7 +39,6 @@
 	            <!-- Divider -->
 	            <hr class="sidebar-divider my-0">
 
-	            <!-- Nav Item - Dashboard -->
 	           
 
 	           
@@ -130,45 +129,53 @@
 	            </li>
 	            @endif
 
-	            <!-- Nav Item - Pages Collapse Menu -->
-	            @if(auth()->user()->canPermission('studentstatement_create_edit'))
-	            <li class="nav-item">
-	                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#studentstatement"
-	                    aria-expanded="true" aria-controls="studentstatement">
-	                    <span>{{__('studentstatement')}}</span>
-	                    <i class="fas fa-fw fa-users"></i>
-	                </a>
-	                <div id="studentstatement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-	                    <div class="bg-white py-2 collapse-inner rounded">
-	                        <h6 class="collapse-header">إدارة {{__('studentstatement')}}</h6>
-	                        <a class="collapse-item" href="{{route('studentstatement.index')}}">
-	                        	{{__('studentstatement')}} 
-	                    	</a>
-	                    </div>
-	                </div>
-	            </li>
-	            @endif
 
 	            <!-- Nav Item - Pages Collapse Menu -->
-	            @if(auth()->user()->canPermission('msjedstatement_create_edit'))
+	            @if(auth()->user()->canPermission('manage_user_account'))
 	            <li class="nav-item">
 	                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#msjedstatement"
 	                    aria-expanded="true" aria-controls="msjedstatement">
-	                    <span>{{__('msjedstatement')}}</span>
+	                    <small class="">حسابات مستخدمين النظام</small>
 	                    <i class="fas fa-fw fa-users"></i>
 	                </a>
 	                <div id="msjedstatement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	                    <div class="bg-white py-2 collapse-inner rounded">
-	                        <h6 class="collapse-header">إدارة {{__('msjedstatement')}}</h6>
-	                        <a class="collapse-item" href="{{route('msjedstatement.index')}}">
-	                        	{{__('msjedstatement')}} 
+
+	                    	<a class="collapse-item" href="{{route('user.index')}}">
+	                        	القائمة 
 	                    	</a>
+
+	                    	<a class="collapse-item" href="{{route('user.teacher.create')}}">
+	                        	إضافة حساب {{__('teacher')}} 
+	                    	</a>
+	                    	<a class="collapse-item" href="{{route('user.wakeel.create')}}">
+	                        	إضافة حساب {{__('wakeel')}} 
+	                    	</a>
+
 	                    </div>
 	                </div>
 	            </li>
 	            @endif
 
 
+	            <!-- Nav Item - statement -->
+	            @if(auth()->user()->canPermission('manage_msjedstatement'))
+	            <li class="nav-item active">
+	                <a class="nav-link" href="{{route('msjedstatement.index')}}">
+	                    <span>{{__('msjedstatement')}}</span>
+	                    <i class="fas fa-fw fa-tachometer-alt"></i>
+	                </a>
+	            </li>
+	            @endif
+
+	            @if(auth()->user()->canPermission('manage_studentstatement'))
+	            <li class="nav-item active">
+	                <a class="nav-link" href="{{route('studentstatement.index')}}">
+	                    <span>{{__('studentstatement')}}</span>
+	                    <i class="fas fa-fw fa-tachometer-alt"></i>
+	                </a>
+	            </li>
+	            @endif
 
 	            <!-- Divider -->
 	            <hr class="sidebar-divider d-none d-md-block">
@@ -242,13 +249,13 @@
 	                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                <i class="fas fa-bell fa-fw"></i>
 	                                <!-- Counter - Alerts -->
-	                                <span class="badge badge-danger badge-counter">3+</span>
+	                                <span class="badge badge-danger badge-counter">0</span>
 	                            </a>
 	                            <!-- Dropdown - Alerts -->
 	                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
 	                                aria-labelledby="alertsDropdown">
 	                                <h6 class="dropdown-header">
-	                                    Alerts Center
+	                                    ...
 	                                </h6>
 	                                <a class="dropdown-item d-flex align-items-center" href="#">
 	                                    <div class="mr-3">
@@ -257,66 +264,16 @@
 	                                        </div>
 	                                    </div>
 	                                    <div>
-	                                        <div class="small text-gray-500">December 12, 2019</div>
-	                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+	                                        <div class="small text-gray-500">...</div>
+	                                        <span class="font-weight-bold">...</span>
 	                                    </div>
 	                                </a>
-	                                <a class="dropdown-item d-flex align-items-center" href="#">
-	                                    <div class="mr-3">
-	                                        <div class="icon-circle bg-success">
-	                                            <i class="fas fa-donate text-white"></i>
-	                                        </div>
-	                                    </div>
-	                                    <div>
-	                                        <div class="small text-gray-500">December 7, 2019</div>
-	                                        $290.29 has been deposited into your account!
-	                                    </div>
-	                                </a>
-	                                <a class="dropdown-item d-flex align-items-center" href="#">
-	                                    <div class="mr-3">
-	                                        <div class="icon-circle bg-warning">
-	                                            <i class="fas fa-exclamation-triangle text-white"></i>
-	                                        </div>
-	                                    </div>
-	                                    <div>
-	                                        <div class="small text-gray-500">December 2, 2019</div>
-	                                        Spending Alert: We've noticed unusually high spending for your account.
-	                                    </div>
-	                                </a>
-	                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+	
+	                                <a class="dropdown-item text-center small text-gray-500" href="#">..</a>
 	                            </div>
 	                        </li>
 
-	                        <!-- Nav Item - Messages -->
-	                        <li class="nav-item dropdown no-arrow mx-1">
-	                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-	                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                                <i class="fas fa-envelope fa-fw"></i>
-	                                <!-- Counter - Messages -->
-	                                <span class="badge badge-danger badge-counter">7</span>
-	                            </a>
-	                            <!-- Dropdown - Messages -->
-	                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-	                                aria-labelledby="messagesDropdown">
-	                                <h6 class="dropdown-header">
-	                                    Message Center
-	                                </h6>
-	 
-	                                <a class="dropdown-item d-flex align-items-center" href="#">
-	                                    <div class="dropdown-list-image mr-3">
-	                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-	                                            alt="...">
-	                                        <div class="status-indicator bg-success"></div>
-	                                    </div>
-	                                    <div>
-	                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-	                                            told me that people say this to all dogs, even if they aren't good...</div>
-	                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-	                                    </div>
-	                                </a>
-	                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-	                            </div>
-	                        </li>
+	                        
 
 	                        <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -331,14 +288,11 @@
 	                            <!-- Dropdown - User Information -->
 	                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 	                                aria-labelledby="userDropdown">
-	                                <a class="dropdown-item" href="#">
+	                                <a class="dropdown-item" href="{{route('user.profile')}}">
 	                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-	                                    {{__('Profile')}}
+	                                    {{__('profile')}}
 	                                </a>
-	                                <a class="dropdown-item" href="#">
-	                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-	                                    {{__('Settings')}}
-	                                </a>
+	                                
 	                                <div class="dropdown-divider"></div>
 	                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
 	                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -354,6 +308,14 @@
 
 	                <!-- Begin Page Content -->
 	                <div class="p-2">
+
+	                	@if($errors->any())
+			                <center class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+			                @foreach($errors->all() as $error)
+			                    <li class="text-danger">{{$error}}</li>
+			                @endforeach
+			                </center>
+			             @endif
 
 	                	@if(session('status'))
 	                	<div class="alert alert-{{session('status')}}">

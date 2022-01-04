@@ -32,4 +32,13 @@ a:hover{
   cursor: pointer;
 }
 
+small{
+  font-size: 11px !important;
+}
+.small{
+  font-size: 11px !important;
+}
 
+.flex{
+  display: flex;
+}

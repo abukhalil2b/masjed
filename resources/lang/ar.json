@@ -1,10 +1,16 @@
 {
+    "profile":"الملف الشخصي",
+    "account":"حساب",
+    "accounts":"الحسابات",
     "permissions":"الصلاحيات",
 
     "active":"مفعل",
     "deactive":"معطل",
     "phone":"الهاتف",
-
+    "disable":"تعطيل",
+    "enable":"تفعيل",
+    "delete":"حذف",
+    "confirm_delete":"تأكيد الحذف",
 
     "date":"تاريخ",
     "edit":"تعديل",
@@ -17,14 +23,10 @@
     "task":"مهمة",
     "tasks":"المهام",
 
-    "delete":"حذف",
-    "confirm_delete":"تأكيد الحذف",
-
     "start_at":"يبدأ",
     "end_at":"ينتهى",
     "amount":"المبلغ",
     "status":"العملية أو الحالة",
-
     
     "out":"صرف",
     "in":"ايداع",
@@ -43,10 +45,13 @@
 
     "masjed": "مسجد",
     "masjeds": "المساجد",
+    "wakeels": "وكلاء",
+    "wakeel": "وكيل",
     "teacher": "مدرس",
     "teachers": "مدرسين",
     "student":"طالب",
     "students":"طلاب",
+    "user":"مستخدم",
 
     "Dashboard":"الصفحة الرئيسية",
     "Logout": "تسجيل الخروج",

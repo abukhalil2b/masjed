@@ -25,28 +25,30 @@
         </div>
     </div>
 </div>
+@else
+<center>لايوجد طلاب</center>
 @endif
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <center>قائمة الطلاب المشتركين في برنامج {{$program->title}}</center>
-                <div class="card-body">
-               @foreach($programStudents as $student)
-                <div class="bar">
-                    {{$student->name}}
-                    <span class="pull-left">{{__('phone')}} {{$student->phone}}</span>
-                    <div>
-                        <small>
-                            {{$student->yearbirth}}
-                        </small>
-                    </div>
-                </div>
-                @endforeach
-                </div>
-            </div>
+
+@if(count($programStudents))
+
+<div class="card">
+    <center>قائمة الطلاب المشتركين في برنامج {{$program->title}}</center>
+    <div class="card-body">
+   @foreach($programStudents as $student)
+    <div class="bar">
+        {{$student->name}}
+        <span class="pull-left">{{__('phone')}} {{$student->phone}}</span>
+        <div>
+            <small>
+                {{$student->yearbirth}}
+            </small>
         </div>
     </div>
+    @endforeach
+    </div>
 </div>
+
+@endif
+
 @endsection
