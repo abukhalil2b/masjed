@@ -29,7 +29,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         Task::create($request->all());
-        return redirect()->back()->with(['status'=>'success','message'=>'تم']);
+        return redirect()->route('task.index')->with(['status'=>'success','message'=>'تم']);
     }
 
     

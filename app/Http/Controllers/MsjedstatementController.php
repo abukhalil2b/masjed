@@ -17,7 +17,14 @@ class MsjedstatementController extends Controller
     public function index()
     {
         $loggedUser = Auth()->user();
-        $msjedstatements = Msjedstatement::where('user_id',$loggedUser->id)
+        $msjedstatements = Msjedstatement::whereHas('userHasMsjedstatementPermission',function($query)use($loggedUser){
+            if($loggedUser->userType!='masjed'){
+                $userId=$loggedUser->parent;
+            }else{
+                $userId=$loggedUser->id;
+            }
+            $query->where('user_has_msjedstatement_permission.user_id',$userId);
+        })
         ->orderby('id','desc')
         ->get();
         return view('sb-admin.msjedstatement.index',compact('msjedstatements'));
@@ -33,7 +40,13 @@ class MsjedstatementController extends Controller
             $amount = $request->amount * -1;
             $request['amount'] = $amount;
         }
-        Msjedstatement::create($request->all());
+        $ms = Msjedstatement::create($request->all());
+        if($loggedUser->userType!='masjed'){
+            $userId=$loggedUser->parent;
+        }else{
+            $userId=$loggedUser->id;
+        }
+        $ms->userHasMsjedstatementPermission()->attach($userId);
         return redirect()->back()->with(['status'=>'success','message'=>'تم']);
     }
 

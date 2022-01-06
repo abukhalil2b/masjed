@@ -10,7 +10,7 @@ class Msjedstatement extends Model
     use HasFactory;
 
     public function userHasMsjedstatementPermission(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class,'user_has_msjedstatement_permission','msjedstatement_id','user_id');
     }
 
     protected $fillable=[

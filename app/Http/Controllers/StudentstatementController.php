@@ -15,7 +15,14 @@ class StudentstatementController extends Controller
     public function index()
     {
         $loggedUser = Auth()->user();
-        $studentstatements = Studentstatement::where('user_id',$loggedUser->id)
+        $studentstatements = Studentstatement::whereHas('userHasStudentstatementPermission',function($query)use($loggedUser){
+            if($loggedUser->userType!='masjed'){
+                $userId=$loggedUser->parent;
+            }else{
+                $userId=$loggedUser->id;
+            }
+            $query->where('user_has_studentstatement_permission.user_id',$userId);
+        })
         ->orderby('id','desc')
         ->get();
         return view('sb-admin.studentstatement.index',compact('studentstatements'));
@@ -31,7 +38,15 @@ class StudentstatementController extends Controller
             $amount = $request->amount * -1;
             $request['amount'] = $amount;
         }
-        Studentstatement::create($request->all());
+
+        $ms = Studentstatement::create($request->all());
+        if($loggedUser->userType!='masjed'){
+            $userId=$loggedUser->parent;
+        }else{
+            $userId=$loggedUser->id;
+        }
+        
+        $ms->userHasStudentstatementPermission()->attach($userId);
         return redirect()->back()->with(['status'=>'success','message'=>'تم']);
     }
 

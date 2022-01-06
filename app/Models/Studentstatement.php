@@ -17,7 +17,7 @@ class Studentstatement extends Model
 
 
     public function userHasStudentstatementPermission(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class,'user_has_studentstatement_permission','studentstatement_id','user_id');
     }
 
     public function user(){

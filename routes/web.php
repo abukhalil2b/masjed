@@ -138,8 +138,10 @@ Route::prefix('user')->group(function () {
 	->name('useraccount.confirm_account_delete');
 	
 	// user permission 
-	Route::get('permissions/index/{user}',[PermissionController::class,'index'])->name('user.permissions.index');
-	Route::post('permissions/update/{user}',[PermissionController::class,'update'])->name('user.permissions.update');
+	Route::get('permissions/index/{user}',[PermissionController::class,'index'])
+	->name('user.permissions.index');
+	Route::post('permissions/update/{user}',[PermissionController::class,'update'])
+	->name('user.permissions.update');
 
 });
 
@@ -170,7 +172,7 @@ Route::prefix('student')->group(function () {
 Route::prefix('studentstatement')->group(function () {
 
 	Route::get('index',[StudentstatementController::class,'index'])
-	->middleware('userPermission:manage_studentstatement')
+	->middleware('userPermission:view_studentstatement')
 	->name('studentstatement.index');
 
 	Route::get('{studentstatement}/edit',[StudentstatementController::class,'edit'])
@@ -190,13 +192,10 @@ Route::prefix('studentstatement')->group(function () {
 	->name('studentstatement.store');
 });
 
-
+//msjedstatement
 Route::prefix('msjedstatement')
 	->middleware('userPermission:manage_msjedstatement')
 	->group(function () {
-
-	Route::get('index',[MsjedstatementController::class,'index'])
-	->name('msjedstatement.index');
 
 	Route::get('{msjedstatement}/edit',[MsjedstatementController::class,'edit'])
 	->name('msjedstatement.edit');
@@ -211,6 +210,9 @@ Route::prefix('msjedstatement')
 	->name('msjedstatement.store');
 
 });
+
+Route::get('msjedstatement/index',[MsjedstatementController::class,'index'])
+	->name('msjedstatement.index');
 
 
 

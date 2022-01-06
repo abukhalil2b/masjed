@@ -42,10 +42,15 @@
 				@endif
 				
 				<div class="small mt-3">
-					{{__('permissions')}}: 
+
+					<a @if($user->isSuperadmin()) href="{{route('user.permissions.index',$user->id)}}" @endif>
+						{{__('permissions')}}: 
+					</a>
+
 					@foreach($user->permissions as $permission)
 					<div class="mr-2 badge badge-primary badge-counter p-1">{{$permission->title}}</div>
 					@endforeach
+
 				</div>
 			</div>	
 			<div  class="text-left">

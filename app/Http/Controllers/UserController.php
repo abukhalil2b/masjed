@@ -222,13 +222,13 @@ class UserController extends Controller
     }
     
     protected function grantMsjedstatementPermission($owner){
-        $msjedstatementPermission = Permission::whereSlug('manage_msjedstatement')->first();
-        $owner->permissions()->attach($msjedstatementPermission->id);
+        $msjedstatementPermissionIds = Permission::whereCate('msjedstatement')->pluck('id');
+        $owner->permissions()->attach($msjedstatementPermissionIds);
     }
 
     protected function grantStudentstatementPermission($owner){
-        $studentstatementPermission = Permission::whereSlug('manage_studentstatement')->first();
-        $owner->permissions()->attach($studentstatementPermission->id);
+        $studentstatementPermissionIds = Permission::whereCate('studentstatement')->pluck('id');
+        $owner->permissions()->attach($studentstatementPermissionIds);
     }
 
     protected function deleteElementFromArray($arr,$elemt){

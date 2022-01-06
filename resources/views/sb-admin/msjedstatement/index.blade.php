@@ -2,7 +2,11 @@
 @section('content')
 
 <h3>{{__('msjedstatement')}}</h3>
+
+@if(auth()->user()->canPermission('manage_msjedstatement'))
 <a class="p-4" href="#" data-toggle="modal" data-target="#addNewMsjedstatement">+ {{__('new')}}</a>
+@endif
+
 <center><b>الرصيد: {{$msjedstatements->sum('amount')}}</b></center>
 <div class="card mt-2">
     <div class="p-1">
@@ -13,25 +17,24 @@
             </div>
 
             <div>
-                
-
                 {{abs($msjedstatement->amount)}} 
                 <small>{{__($msjedstatement->status)}}</small>
-                <div class="msjedstatement-desc small"><small>{{$msjedstatement->description}}</small></div>
+                <div class="small"><small>{{$msjedstatement->description}}</small></div>
             </div>
            
-        
-        <div  id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" class="text-left">
+        @if(auth()->user()->canPermission('manage_msjedstatement'))
+        <div  id="dropdownMenuButton{{$msjedstatement->id}}" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" class="text-left">
             <i class="fas fa-fw fa-edit"></i>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="{{route('msjedstatement.edit',$msjedstatement->id)}}">
-                    {{__('edit')}}
-                </a>
-                <a class="dropdown-item"onclick="return confirm('هل متأكد؟')" href="{{route('msjedstatement.delete',$msjedstatement->id)}}">
-                    {{__('delete')}}
-                </a>
-            </div>
         </div>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{$msjedstatement->id}}">
+            <a href="{{route('msjedstatement.edit',$msjedstatement->id)}}" class="dropdown-item" >
+                {{__('edit')}}
+            </a>
+            <a class="dropdown-item" onclick="return confirm('هل متأكد؟')" href="{{route('msjedstatement.delete',$msjedstatement->id)}}">
+                {{__('delete')}}
+            </a>
+        </div>
+        @endif
         <hr>
         @endforeach
         

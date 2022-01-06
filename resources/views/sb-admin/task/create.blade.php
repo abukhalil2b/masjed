@@ -20,7 +20,7 @@
         <tr>
           <td>{{__('maxpoint')}}</td>
           <td>
-          <input name="maxpoint" class="form-control">
+          <input name="maxpoint" class="form-control" type="number">
           </td>
         </tr>
         <tr>

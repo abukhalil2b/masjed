@@ -47,6 +47,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    
+    public function isSuperadmin(){
+        return $this->id===1;
+    }
 
     public function isActive(){
         return $this->active;
@@ -89,11 +93,11 @@ class User extends Authenticatable
     }
     
     public function userHasMsjedstatementPermission(){
-        return $this->belongsToMany(Msjedstatement::class);
+        return $this->belongsToMany(Msjedstatement::class,'user_has_msjedstatement_permission','user_id','msjedstatement_id');
     }
 
     public function userHasStudentstatementPermission(){
-        return $this->belongsToMany(Studentstatement::class);
+        return $this->belongsToMany(Studentstatement::class,'user_has_studentstatement_permission','user_id','studentstatement_id');
     }
 
     public function checkUserHasStudentstatementPermission($studentstatement){

@@ -65,7 +65,7 @@
 	            <hr class="sidebar-divider">
 
 	            <!-- Nav Item - Pages Collapse Menu -->
-	            @if(auth()->user()->canPermission('program_create_edit'))
+	            @if(auth()->user()->canPermission('program_show'))
 	            <li class="nav-item">
 	                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#programs"
 	                    aria-expanded="true" aria-controls="programs">
@@ -76,7 +76,9 @@
 	                    <div class="bg-white py-2 collapse-inner rounded">
 	                        <h6 class="collapse-header">إدارة {{__('programs')}}</h6>
 	                        <a class="collapse-item" href="{{route('program.index')}}">{{__('programs')}}</a>
+	                        @if(auth()->user()->canPermission('program_create_edit'))
 	                        <a class="collapse-item" href="{{route('program.create')}}">اضافة {{__('program')}} جديد</a>
+	                        @endif
 	                    </div>
 	                </div>
 	            </li>
@@ -159,7 +161,7 @@
 
 
 	            <!-- Nav Item - statement -->
-	            @if(auth()->user()->canPermission('manage_msjedstatement'))
+	            @if(auth()->user()->canPermission('view_msjedstatement'))
 	            <li class="nav-item active">
 	                <a class="nav-link" href="{{route('msjedstatement.index')}}">
 	                    <span>{{__('msjedstatement')}}</span>
@@ -168,7 +170,7 @@
 	            </li>
 	            @endif
 
-	            @if(auth()->user()->canPermission('manage_studentstatement'))
+	            @if(auth()->user()->canPermission('view_studentstatement'))
 	            <li class="nav-item active">
 	                <a class="nav-link" href="{{route('studentstatement.index')}}">
 	                    <span>{{__('studentstatement')}}</span>
