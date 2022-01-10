@@ -44,7 +44,7 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $task->update($request->all());
-        return redirect()->back()->with(['status'=>'success','message'=>'تم']);
+        return redirect()->route('task.index')->with(['status'=>'success','message'=>'تم']);
     }
 
   

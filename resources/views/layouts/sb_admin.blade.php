@@ -74,11 +74,7 @@
 	                </a>
 	                <div id="programs" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	                    <div class="bg-white py-2 collapse-inner rounded">
-	                        <h6 class="collapse-header">إدارة {{__('programs')}}</h6>
 	                        <a class="collapse-item" href="{{route('program.index')}}">{{__('programs')}}</a>
-	                        @if(auth()->user()->canPermission('program_create_edit'))
-	                        <a class="collapse-item" href="{{route('program.create')}}">اضافة {{__('program')}} جديد</a>
-	                        @endif
 	                    </div>
 	                </div>
 	            </li>
@@ -119,13 +115,10 @@
 	                </a>
 	                <div id="tasks" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	                    <div class="bg-white py-2 collapse-inner rounded">
-	                        <h6 class="collapse-header">إدارة {{__('tasks')}}</h6>
 	                        <a class="collapse-item" href="{{route('task.index')}}">
 	                        	{{__('tasks')}} 
 	                    	</a>
-	                        <a class="collapse-item" href="{{route('task.create')}}">
-	                        	اضافة {{__('task')}} جديد
-	                    	</a>
+	                        
 	                    </div>
 	                </div>
 	            </li>
