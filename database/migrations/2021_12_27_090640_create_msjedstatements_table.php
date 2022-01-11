@@ -15,7 +15,7 @@ class CreateMsjedstatementsTable extends Migration
     {
         Schema::create('msjedstatements', function (Blueprint $table) {
             $table->id();
-            $table->integer('amount');
+            $table->float('amount',8,3);
             $table->string('status',5);// in - out
             $table->string('description')->nullable();
             $table->integer('user_id');

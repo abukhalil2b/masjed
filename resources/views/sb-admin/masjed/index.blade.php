@@ -1,5 +1,8 @@
 @extends('layouts.sb_admin')
 @section('content')
+<div class="p-3">
+    <a href="{{route('user.masjed.create')}}">+ {{__('new')}}</a>
+</div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">{{__('masjeds')}}</h6>

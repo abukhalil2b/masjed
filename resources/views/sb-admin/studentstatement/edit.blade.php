@@ -8,7 +8,7 @@
     </div>
     <div class="mt-3">
         <div class="my-1">{{__('amount')}}</div>
-        <input type="number" name="amount" class="form-control" value="{{abs($studentstatement->amount)}}">
+        <input pattern="^\d*(\.\d{0,2})?$" step="2" name="amount" value="{{abs($studentstatement->amount)}}" class="form-control">
     </div>
     <div class="mt-3">
         <div class="my-1">{{__('status')}}</div>

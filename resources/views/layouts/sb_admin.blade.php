@@ -53,9 +53,7 @@
 	                </a>
 	                <div id="masjeds" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	                    <div class="bg-white py-2 collapse-inner rounded">
-	                        <h6 class="collapse-header">إدارة {{__('masjeds')}}</h6>
 	                        <a class="collapse-item" href="{{route('user.masjed.index')}}">{{__('masjeds')}}</a>
-	                        <a class="collapse-item" href="{{route('user.masjed.create')}}">اضافة {{__('masjed')}} جديد</a>
 	                    </div>
 	                </div>
 	            </li>
